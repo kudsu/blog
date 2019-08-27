@@ -19,40 +19,40 @@ namespace Netnr.Web.Controllers
             return View();
         }
 
-        [Description("查询记事本列表")]
-        [Authorize]
-        public QueryDataOutputVM QueryNoteList(QueryDataInputVM ivm)
-        {
-            var ovm = new QueryDataOutputVM();
+        //[Description("查询记事本列表")]
+        //[Authorize]
+        //public QueryDataOutputVM QueryNoteList(QueryDataInputVM ivm)
+        //{
+        //    var ovm = new QueryDataOutputVM();
 
-            var uinfo = new Func.UserAuthAid(HttpContext).Get();
+        //    var uinfo = new Func.UserAuthAid(HttpContext).Get();
 
-            using (var db = new ContextBase())
-            {
-                var query = from a in db.Notepad
-                            join b in db.UserInfo on a.Uid equals b.UserId
-                            orderby a.NoteCreateTime descending
-                            where a.Uid == uinfo.UserId
-                            select new Domain.Notepad
-                            {
-                                NoteId = a.NoteId,
-                                NoteTitle = a.NoteTitle,
-                                NoteCreateTime = a.NoteCreateTime,
-                                NoteUpdateTime = a.NoteUpdateTime,
-                                Uid = a.Uid,
+        //    using (var db = new ContextBase())
+        //    {
+        //        var query = from a in db.Notepad
+        //                    join b in db.UserInfo on a.Uid equals b.UserId
+        //                    orderby a.NoteCreateTime descending
+        //                    where a.Uid == uinfo.UserId
+        //                    select new Domain.Notepad
+        //                    {
+        //                        NoteId = a.NoteId,
+        //                        NoteTitle = a.NoteTitle,
+        //                        NoteCreateTime = a.NoteCreateTime,
+        //                        NoteUpdateTime = a.NoteUpdateTime,
+        //                        Uid = a.Uid,
 
-                                Spare3 = b.Nickname
-                            };
+        //                        Spare3 = b.Nickname
+        //                    };
 
-                if (!string.IsNullOrWhiteSpace(ivm.pe1))
-                {
-                    query = query.Where(x => x.NoteTitle.Contains(ivm.pe1));
-                }
+        //        if (!string.IsNullOrWhiteSpace(ivm.pe1))
+        //        {
+        //            query = query.Where(x => x.NoteTitle.Contains(ivm.pe1));
+        //        }
 
-                Func.Common.QueryJoin(query, ivm, db, ref ovm);
-            }
-            return ovm;
-        }
+        //        Func.Common.QueryJoin(query, ivm, db, ref ovm);
+        //    }
+        //    return ovm;
+        //}
 
         [Description("保存一条记事本")]
         [Authorize]
