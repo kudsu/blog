@@ -129,8 +129,9 @@ namespace Netnr.Web.Controllers
                 int num = db.SaveChanges();
 
                 vm.Set(num > 0);
-            }
 
+                Core.CacheTo.Remove("Table_WritingTags_GroupBy");//去除获取文章标签统计缓存
+            }
             return vm;
         }
 

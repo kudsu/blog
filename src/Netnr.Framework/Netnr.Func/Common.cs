@@ -56,7 +56,7 @@ namespace Netnr.Func
                     }
 
                     rt = dic;
-                    Core.CacheTo.Set("Table_WritingTags_GroupBy", rt, 300, false);
+                    Core.CacheTo.Set("Table_WritingTags_GroupBy", rt, 7200, false);
                 }
             }
             return rt;
